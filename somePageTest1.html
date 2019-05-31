@@ -1,13 +1,26 @@
 <html>
-<head>
-<script src="//assets.adobedtm.com/launch-ENbdc22e03bd374069afb00b655654ec5b-development.min.js"></script> 
-</head>
+	<head>
+		<script src="//assets.adobedtm.com/launch-ENbdc22e03bd374069afb00b655654ec5b-development.min.js"></script> 
+	</head>
+	<body>
+		<script>
+			var digitalData ={page:{pageName:'InderTestPageWithBPIDandEMailID',language: "English",pageInfo: {"appName":"InderTestPage1"},category:{primaryCategory:'',subSection1:""},},user:{platform:"Web",homeCircle:"",loginStatus:"Anonymous",bpid:"",hashedEmail:"",memberFlag:"",customerType:""},journey:[{simType:"",journeyType:'',filterOption: "",sortOption:"",}],link:{},form:{},content:{},socialPlatform:{},channel:"Home",customer:"true"};
+		</script>
+		<script >
 
-
-<body>
-
-<script >
-var digitalData ={page:{pageName:'InderTestPageWithBPIDandEMailID',language: "English",pageInfo: {"appName":"InderTestPage1"},category:{primaryCategory:'',subSection1:""},},user:{platform:"Web",homeCircle:"",loginStatus:"Anonymous",bpid:"",hashedEmail:"",memberFlag:"",customerType:""},journey:[{simType:"",journeyType:'',filterOption: "",sortOption:"",}],link:{},form:{},content:{},socialPlatform:{},channel:"Home",customer:"true"};
+			function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+			var bpID_val_from_qs = getParameterByName("bpid");
+			if (bpID_val_from_qs != null) {
+	digitalData.user.bpid=bpID_val_from_qs;
+			}
 </script >
 
 <script >
@@ -18,10 +31,9 @@ function MarkInAdobe(eventName){
 
 if (eventName == 'Login')
 {
-digitalData.user.bpid=document.getElementById("BP_ID").value;
-digitalData.user.loginStatus="Logged in";
 
 _satellite.track('linkTracking') ;
+	
 
 }
 
