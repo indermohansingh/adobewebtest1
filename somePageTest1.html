@@ -7,10 +7,14 @@
 <body>
 
 <script >
+var digitalData ={page:{pageName:'InderTestPageWithBPIDandEMailID',language: "English",pageInfo: {"appName":"InderTestPage1"},category:{primaryCategory:'',subSection1:""},},user:{platform:"Web",homeCircle:"",loginStatus:"Anonymous",bpid:"",hashedEmail:"",memberFlag:"",customerType:""},journey:[{simType:"",journeyType:'',filterOption: "",sortOption:"",}],link:{},form:{},content:{},socialPlatform:{},channel:"Home",customer:"true"};
+</script >
+
+<script >
 
 
 function MarkInAdobe(eventName){
-	alert(eventName + 'start' + document.getElementById("BP_ID").value + ' ' + document.getElementById("PhoneNum").value + ' ' + document.getElementById("EmailID").value);
+	alert(eventName + 'start' + document.getElementById("BP_ID").value + ' ' );
 
 if (eventName == 'Login')
 {
