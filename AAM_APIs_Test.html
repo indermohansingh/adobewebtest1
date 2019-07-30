@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>AAM APIs</title>
+   </head>
+   <body>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+      <script>
+
+         var adb_username = "";
+         var adb_pass = "";
+         var adb_clientID = "";
+         var adb_clientPass = "";
+	      
+	      function getAuthCreds() {
+         let urlParams = new URLSearchParams(window.location.search);
+         urlParams = new URLSearchParams(window.location.search);
+         
+         // Client ID and API key from the Developer Console
+          adb_username = urlParams.get('user');
+          adb_pass = urlParams.get('pass');
+          adb_clientID = urlParams.get('cid');
+          adb_clientPass = urlParams.get('cpass');
+	      }
+	      
+      function doAuth() {
+         var base64IDPass=btoa(adb_clientID + ':' + adb_clientPass );
+         base64IDPass = 'Basic ' + base64IDPass ;
+alert (base64IDPass);
+
+$.post( {
+
+    url: 'https://api.demdex.com/oauth/token',
+    type: 'POST',
+  dataType: "json",
+    data: 'grant_type=password&username=' + adb_username + '&password=' +  adb_pass,
+    beforeSend : function( xhr ) {
+        xhr.setRequestHeader( "Authorization", "Basic " + base64IDPass);
+        xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+    },
+    success: function( response ) {
+                alert ('success');
+  var responseData = JSON.parse(response);
+  console.log(responseData);
+    },
+            error: function (error) {
+                alert ('error');
+                alert (error);
+    }
+} );
+
+
+      }
+
+      function doAuth2() {
+         var base64IDPass=btoa(adb_clientID + ':' + adb_clientPass );
+
+         $.ajax({
+            url: 'https://api.demdex.com/oauth/token',
+            type: 'POST',
+            dataType: "jsonp",
+            headers: {
+                'Authorization': 'Basic ' + base64IDPass
+            },
+            contentType: 'application/x-www-form-urlencoded',
+            data: { content: 'grant_type=password&username=' + adb_username + '&password=' +  adb_pass },
+            success: function (result) {
+	alert ('worked');
+	alert (result);
+               // CallBack(result);
+            },
+            error: function (error) {
+                alert ('error');
+                alert (error);
+            }
+        });
+      }
+      </script>
+
+                  <button onclick="getAuthCreds(); doAuth();">Do Auth</button>
+
+   </body>
+</html>
+
