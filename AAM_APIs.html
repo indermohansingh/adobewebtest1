@@ -9,8 +9,24 @@
 
       <script>
 
+         var adb_username = "";
+         var adb_pass = "";
+         var adb_clientID = "";
+         var adb_clientPass = "";
+	      
+	      function getAuthCreds() {
+         let urlParams = new URLSearchParams(window.location.search);
+         urlParams = new URLSearchParams(window.location.search);
+         
+         // Client ID and API key from the Developer Console
+          adb_username = urlParams.get('user');
+          adb_pass = urlParams.get('pass');
+          adb_clientID = urlParams.get('cid');
+          adb_clientPass = urlParams.get('cpass');
+	      }
+	      
       function doAuth() {
-         var base64IDPass=btoa('reliancecorporateit-baaam:nqppmp7i9u2o8145b0oghu2mkc96esa822nbot9ce23k1p3du4o');
+         var base64IDPass=btoa(adb_clientID + ':' + adb_clientPass );
          base64IDPass = 'Basic ' + base64IDPass ;
 alert (base64IDPass);
 
@@ -19,9 +35,9 @@ $.post( {
     url: 'https://api.demdex.com/oauth/token',
     type: 'POST',
   dataType: "json",
-    data: 'grant_type=password&username=Inder_jio_baaam&password=Yonewtool13!WIthBigPassword' ,
+    data: 'grant_type=password&username=' + adb_username + '&password=' +  adb_pass,
     beforeSend : function( xhr ) {
-        xhr.setRequestHeader( "Authorization", "Basic cmVsaWFuY2Vjb3Jwb3JhdGVpdC1iYWFhbTpucXBwbXA3aTl1Mm84MTQ1YjBvZ2h1Mm1rYzk2ZXNhODIybmJvdDljZTIzazFwM2R1NG8=");
+        xhr.setRequestHeader( "Authorization", "Basic " + base64IDPass);
         xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
     },
     success: function( response ) {
@@ -39,7 +55,7 @@ $.post( {
       }
 
       function doAuth2() {
-         var base64IDPass=btoa('reliancecorporateit-baaam:nqppmp7i9u2o8145b0oghu2mkc96esa822nbot9ce23k1p3du4o');
+         var base64IDPass=btoa(adb_clientID + ':' + adb_clientPass );
 
          $.ajax({
             url: 'https://api.demdex.com/oauth/token',
@@ -49,7 +65,7 @@ $.post( {
                 'Authorization': 'Basic ' + base64IDPass
             },
             contentType: 'application/x-www-form-urlencoded',
-            data: { content: 'grant_type=password&username=Inder_jio_baaam&password=Yonewtool13!WIthBigPassword' },
+            data: { content: 'grant_type=password&username=' + adb_username + '&password=' +  adb_pass },
             success: function (result) {
 	alert ('worked');
 	alert (result);
@@ -63,7 +79,7 @@ $.post( {
       }
       </script>
 
-                  <button onclick="doAuth();">Do Auth</button>
+                  <button onclick="getAuthCreds(); doAuth();">Do Auth</button>
 
    </body>
 </html>
