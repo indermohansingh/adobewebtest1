@@ -34,7 +34,7 @@ $.post( {
 
     url: 'https://api.demdex.com/oauth/token',
     type: 'POST',
-  dataType: "json",
+  dataType: "jsonp",
     data: 'grant_type=password&username=' + adb_username + '&password=' +  adb_pass,
     beforeSend : function( xhr ) {
         xhr.setRequestHeader( "Authorization", "Basic " + base64IDPass);
