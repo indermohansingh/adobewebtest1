@@ -31,15 +31,15 @@
 alert (base64IDPass);
 
 $.post( {
-
-    url: 'https://api.demdex.com/oauth/token',
-    type: 'POST',
-  dataType: "jsonp",
-    data: 'grant_type=password&username=' + adb_username + '&password=' +  adb_pass,
-    beforeSend : function( xhr ) {
-        xhr.setRequestHeader( "Authorization", "Basic " + base64IDPass);
-        xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
-    },
+    url: "https://api.demdex.com/oauth/token",
+    type: "POST",
+  dataType: "json",
+            headers: {
+                'Authorization': base64IDPass ,
+            contentType: 'application/x-www-form-urlencoded',
+		'Access-Control-Allow-Origin': '*'
+            },
+    data: { content: 'grant_type=password&username=' + adb_username + '&password=' +  adb_pass },
     success: function( response ) {
                 alert ('success');
   var responseData = JSON.parse(response);
@@ -60,9 +60,10 @@ $.post( {
          $.ajax({
             url: 'https://api.demdex.com/oauth/token',
             type: 'POST',
-            dataType: "jsonp",
+            dataType: "json",
             headers: {
-                'Authorization': 'Basic ' + base64IDPass
+                'Authorization': 'Basic ' + base64IDPass,
+			'Access-Control-Allow-Origin': '*'
             },
             contentType: 'application/x-www-form-urlencoded',
             data: { content: 'grant_type=password&username=' + adb_username + '&password=' +  adb_pass },
@@ -79,8 +80,7 @@ $.post( {
       }
       </script>
 
-                  <button onclick="getAuthCreds(); doAuth();">Do Auth</button>
+                  <button type="button" onclick="getAuthCreds(); doAuth();">Do Auth</button>
 
    </body>
 </html>
-
