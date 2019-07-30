@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>AAM APIs</title>
+   </head>
+   <body>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+      <script>
+
+      function doAuth() {
+         var base64IDPass=btoa('reliancecorporateit-baaam:nqppmp7i9u2o8145b0oghu2mkc96esa822nbot9ce23k1p3du4o');
+         base64IDPass = 'Basic ' + base64IDPass ;
+alert (base64IDPass);
+
+$.post( {
+
+    url: 'https://api.demdex.com/oauth/token',
+    type: 'POST',
+  dataType: "json",
+    data: 'grant_type=password&username=Inder_jio_baaam&password=Yonewtool13!WIthBigPassword' ,
+    beforeSend : function( xhr ) {
+        xhr.setRequestHeader( "Authorization", "Basic cmVsaWFuY2Vjb3Jwb3JhdGVpdC1iYWFhbTpucXBwbXA3aTl1Mm84MTQ1YjBvZ2h1Mm1rYzk2ZXNhODIybmJvdDljZTIzazFwM2R1NG8=");
+        xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+    },
+    success: function( response ) {
+                alert ('success');
+  var responseData = JSON.parse(response);
+  console.log(responseData);
+    },
+            error: function (error) {
+                alert ('error');
+                alert (error);
+    }
+} );
+
+
+      }
+
+      function doAuth2() {
+         var base64IDPass=btoa('reliancecorporateit-baaam:nqppmp7i9u2o8145b0oghu2mkc96esa822nbot9ce23k1p3du4o');
+
+         $.ajax({
+            url: 'https://api.demdex.com/oauth/token',
+            type: 'POST',
+            dataType: "jsonp",
+            headers: {
+                'Authorization': 'Basic ' + base64IDPass
+            },
+            contentType: 'application/x-www-form-urlencoded',
+            data: { content: 'grant_type=password&username=Inder_jio_baaam&password=Yonewtool13!WIthBigPassword' },
+            success: function (result) {
+	alert ('worked');
+	alert (result);
+               // CallBack(result);
+            },
+            error: function (error) {
+                alert ('error');
+                alert (error);
+            }
+        });
+      }
+      </script>
+
+                  <button onclick="doAuth();">Do Auth</button>
+
+   </body>
+</html>
+
